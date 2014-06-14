@@ -14,5 +14,11 @@ bit 5 : 	1 : hStep
 bit 6 : 	1 : fStep
 bit 7 : 	1 : wave
 
+speed bits layout:
+bit 0 - 7 represents a number 0 - 255, 
+can be used as a speed input  [0 - 100].
 
+steps bits layout:
+bit 0-15 represents a number 0 - 65535,
+can be used as a steps input [0 - ?]
 	  
