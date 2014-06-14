@@ -20,5 +20,5 @@ can be used as a speed input  [0 - 100].
 
 steps bits layout:
 bit 0-15 represents a number 0 - 65535,
-can be used as a steps input [0 - ?]
+can be used as a steps input [0 - ?].
 	  
