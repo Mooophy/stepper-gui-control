@@ -3,8 +3,10 @@ const int B = 9;
 const int C = 10;
 const int D = 11;
 
+int count = 12;
+
 // speed at 20-500
-const unsigned width = 500;
+const unsigned width = 50;
 
 void setup() {                
   pinMode(A, OUTPUT);     
@@ -15,6 +17,7 @@ void setup() {
 
 void loop() {
 
+  while(count > 0){
   digitalWrite(A, HIGH);
   digitalWrite(B, LOW);
   digitalWrite(C, HIGH);
@@ -38,6 +41,12 @@ void loop() {
   digitalWrite(C, HIGH);
   digitalWrite(D, LOW);
   delay(width);
+  
+  --count;
+  }
+  
+  delay(3000);
+  count = 12;
 }
 
 
