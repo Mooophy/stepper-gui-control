@@ -3,8 +3,8 @@ const int B = 9;
 const int C = 10;
 const int D = 11;
 
-// max speed at 20
-const unsigned width = 20;
+// speed at 20-500
+const unsigned width = 500;
 
 void setup() {                
   pinMode(A, OUTPUT);     
@@ -17,26 +17,26 @@ void loop() {
 
   digitalWrite(A, HIGH);
   digitalWrite(B, LOW);
-  digitalWrite(C, LOW);
+  digitalWrite(C, HIGH);
   digitalWrite(D, LOW);
   delay(width);
 
-  digitalWrite(A, LOW);
+  digitalWrite(A, HIGH);
   digitalWrite(B, LOW);
-  digitalWrite(C, HIGH);
-  digitalWrite(D, LOW);
+  digitalWrite(C, LOW);
+  digitalWrite(D, HIGH);
   delay(width);
 
   digitalWrite(A, LOW);
   digitalWrite(B, HIGH);
   digitalWrite(C, LOW);
-  digitalWrite(D, LOW);
+  digitalWrite(D, HIGH);
   delay(width);
   
   digitalWrite(A, LOW);
-  digitalWrite(B, LOW);
-  digitalWrite(C, LOW);
-  digitalWrite(D, HIGH);
+  digitalWrite(B, HIGH);
+  digitalWrite(C, HIGH);
+  digitalWrite(D, LOW);
   delay(width);
 }
 
