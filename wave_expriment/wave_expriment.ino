@@ -3,8 +3,8 @@ const int B = 9;
 const int C = 10;
 const int D = 11;
 
-
-//int trigger = A0; // used only for testing purposes (trigger on oscilloscope)
+// max speed at 20
+const unsigned width = 20;
 
 void setup() {                
   pinMode(A, OUTPUT);     
@@ -19,28 +19,25 @@ void loop() {
   digitalWrite(B, LOW);
   digitalWrite(C, LOW);
   digitalWrite(D, LOW);
-  delay(50);
-
-  digitalWrite(A, LOW);
-  digitalWrite(B, HIGH);
-  digitalWrite(C, LOW);
-  digitalWrite(D, LOW);
-  delay(50);
+  delay(width);
 
   digitalWrite(A, LOW);
   digitalWrite(B, LOW);
   digitalWrite(C, HIGH);
   digitalWrite(D, LOW);
-  delay(50);
+  delay(width);
+
+  digitalWrite(A, LOW);
+  digitalWrite(B, HIGH);
+  digitalWrite(C, LOW);
+  digitalWrite(D, LOW);
+  delay(width);
   
   digitalWrite(A, LOW);
   digitalWrite(B, LOW);
   digitalWrite(C, LOW);
   digitalWrite(D, HIGH);
-  delay(50);
-
-
-
+  delay(width);
 }
 
 
