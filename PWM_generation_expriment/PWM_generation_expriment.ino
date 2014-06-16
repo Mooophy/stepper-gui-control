@@ -7,15 +7,20 @@ void setup() {
 
 void generate(unsigned pin, unsigned period, unsigned duty);
 
-void loop() {
-  generate(pwm,100,80);
+
+void loop() 
+{
+  generate(pwm,1000,250);
 }
+
+
 void generate(unsigned pin, unsigned period, unsigned duty)
 {
   digitalWrite(pin, HIGH);
-  delay(duty);
+  //delay(duty);
+   delayMicroseconds(duty);
   
   digitalWrite(pin, LOW);
-  delay(period - duty);  
+   delayMicroseconds(period - duty);  
 }
 
