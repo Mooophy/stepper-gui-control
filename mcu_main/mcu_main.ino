@@ -3,6 +3,7 @@ const int B = 9;
 const int C = 10;
 const int D = 11;
 
+//!  struct storing the state information
 class State
 {
   public:  
