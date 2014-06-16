@@ -3,9 +3,19 @@ const int B = 9;
 const int C = 10;
 const int D = 11;
 
-void wave_step(const unsigned* spd, const unsigned* steps, const boolean* cw);
+class State
+{
+  public:  
+  unsigned spd;
+  unsigned steps;
+  boolean  running;    
+  boolean  cw;
+};
 
-void setup() {                
+void wave_step(const State* state);
+
+void setup() 
+{                
   pinMode(A, OUTPUT);     
   pinMode(B, OUTPUT);     
   pinMode(C, OUTPUT);     
@@ -14,28 +24,32 @@ void setup() {
 
 void loop() 
 {
-  unsigned spd = 300;
-  unsigned steps = 30;
-  boolean  cw = true;
-  wave_step(&spd, &steps, &cw);
+  
+  State state;
+  state.spd = 300;
+  state.steps = 50;
+  state.running = true;
+  state.cw = true;
+  
+  wave_step(&state);
 
   while(true);
 }
 
 //!  speed range: [10,500]
-void wave_step(const unsigned* spd, const unsigned* steps, const boolean* cw)
+void wave_step(const State* state)
 {
-  boolean arr[4] = {1,0,0,0};
-  unsigned count = *steps;
-  unsigned a,b,c,d;
-
   //!  specify the starting index according to the direction
+  unsigned a,b,c,d;
   a = 0;
   b = 2;
-  c = *cw?  3  :  1;
-  d = *cw?  1  :  3;
+  c = state->cw?  3  :  1;
+  d = state->cw?  1  :  3;
   
-  while(count--)
+  //!  move steps as specified if running == true.
+  boolean arr[4] = {1,0,0,0};
+  unsigned count = state->steps;
+  while(count-- > 0 && state->running)
   {
     digitalWrite(A, arr[a++]);
     digitalWrite(B, arr[b++]);
@@ -47,7 +61,8 @@ void wave_step(const unsigned* spd, const unsigned* steps, const boolean* cw)
     c %= 4;
     d %= 4;
 
-    delay(10000/(*spd));
+    //!  speed control
+    delay(10000/(state->spd));
   }
 }
 
