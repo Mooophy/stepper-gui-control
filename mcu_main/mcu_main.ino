@@ -28,7 +28,7 @@ void loop()
 {
   
   State state;
-  state.spd = 200;
+  state.spd = 10;
   state.steps = 150;
   state.running = true;
   state.cw = false;
@@ -67,15 +67,15 @@ void wave_step(const State* state)
     delay(10000/(state->spd));
   }
 }
-
+//!  speed range: [10,500]
 void full_step(const State* state)
 {
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
-  b = 3;
-  d = 2;
   a = state->cw?  1  :  0;
-  c = state->cw?  0  :  1;
+  c = state->cw?  0  :  1;  
+  b = state->cw?  3  :  2;
+  d = state->cw?  2  :  3;
   
   //!  move steps as specified if running == true.
   boolean arr[4] = {1,1,0,0};
