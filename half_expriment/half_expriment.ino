@@ -19,51 +19,51 @@ void loop() {
 
   while(count > 0)
   {
-  digitalWrite(A, HIGH);
+  digitalWrite(A, HIGH);//6
   digitalWrite(B, LOW);
-  digitalWrite(C, HIGH);
+  digitalWrite(C, HIGH);//6
   digitalWrite(D, LOW);
   delay(width);
   
-  digitalWrite(A, HIGH);
+  digitalWrite(A, HIGH);//12
   digitalWrite(B, LOW);
   digitalWrite(C, LOW);
   digitalWrite(D, LOW);
   delay(width);
 
-  digitalWrite(A, HIGH);
+  digitalWrite(A, HIGH);//6
   digitalWrite(B, LOW);
   digitalWrite(C, LOW);
-  digitalWrite(D, HIGH);
+  digitalWrite(D, HIGH);//6
   delay(width);
   
   digitalWrite(A, LOW);
   digitalWrite(B, LOW);
   digitalWrite(C, LOW);
-  digitalWrite(D, HIGH);
+  digitalWrite(D, HIGH);//12
   delay(width);
 
   digitalWrite(A, LOW);
-  digitalWrite(B, HIGH);
+  digitalWrite(B, HIGH);//6
   digitalWrite(C, LOW);
-  digitalWrite(D, HIGH);
+  digitalWrite(D, HIGH);//6
   delay(width);
   
   digitalWrite(A, LOW);
-  digitalWrite(B, HIGH);
+  digitalWrite(B, HIGH);//12
   digitalWrite(C, LOW);
   digitalWrite(D, LOW);
   delay(width);
   
   digitalWrite(A, LOW);
-  digitalWrite(B, HIGH);
-  digitalWrite(C, HIGH);
+  digitalWrite(B, HIGH);//6
+  digitalWrite(C, HIGH);//6
   digitalWrite(D, LOW);
   delay(width);
   
   digitalWrite(A, LOW);
   digitalWrite(B, LOW);
-  digitalWrite(C, HIGH);
+  digitalWrite(C, HIGH);//12
   digitalWrite(D, LOW);
   delay(width);
   
