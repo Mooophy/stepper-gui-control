@@ -13,8 +13,9 @@ class State
   boolean  cw;
 };
 
-void wave_step(const State* state);
-void full_step(const State* state);
+void wave(const State* state);
+void full(const State* state);
+void half(const State* state);
 
 void setup() 
 {                
@@ -28,18 +29,18 @@ void loop()
 {
   
   State state;
-  state.spd = 10;
-  state.steps = 150;
+  state.spd = 500;
+  state.steps = 250;
   state.running = true;
-  state.cw = false;
+  state.cw = true;
   
-  full_step(&state);
+  half(&state);
 
   while(true);
 }
 
 //!  speed range: [10,500]
-void wave_step(const State* state)
+void wave(const State* state)
 {
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
@@ -67,8 +68,9 @@ void wave_step(const State* state)
     delay(10000/(state->spd));
   }
 }
+
 //!  speed range: [10,500]
-void full_step(const State* state)
+void full(const State* state)
 {
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
@@ -97,3 +99,45 @@ void full_step(const State* state)
   }  
 }
 
+//!  speed range: [10,500]
+void half(const State* state)
+{  
+  //!  specify the starting index according to the direction
+  int a = 0, c = 2, b = 4, d = 6;
+  
+    //!  move steps as specified if running == true.
+  boolean arr[8] = {1,1,1,0, 0,0,0,0};
+  unsigned count = state->steps;
+  while(count-- > 0 && state->running)
+  {
+      if(!state->cw)
+      {
+            digitalWrite(A, arr[a++]);
+            digitalWrite(B, arr[b++]);
+            digitalWrite(C, arr[c++]);
+            digitalWrite(D, arr[d++]);
+
+            a %= 8;
+            b %= 8;
+            c %= 8;
+            d %= 8;
+      }
+      else
+      {
+            digitalWrite(A, arr[a--]);
+            digitalWrite(B, arr[b--]);
+            digitalWrite(C, arr[c--]);
+            digitalWrite(D, arr[d--]);
+
+            if(a < 0)  a = 7;
+            if(b < 0)  b = 7;
+            if(c < 0)  c = 7;
+            if(d < 0)  d = 7;        
+      }
+
+    //!  speed control
+    delay(10000/(state->spd));
+  }  
+  
+  
+}
