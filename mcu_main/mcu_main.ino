@@ -3,8 +3,7 @@ const int B = 9;
 const int C = 10;
 const int D = 11;
 
-
-//int trigger = A0; // used only for testing purposes (trigger on oscilloscope)
+void wave_step(const unsigned* spd, const unsigned* steps, const boolean* cw);
 
 void setup() {                
   pinMode(A, OUTPUT);     
@@ -13,34 +12,43 @@ void setup() {
   pinMode(D, OUTPUT);     
 }
 
-void loop() {
+void loop() 
+{
+  unsigned spd = 300;
+  unsigned steps = 30;
+  boolean  cw = true;
+  wave_step(&spd, &steps, &cw);
 
-  digitalWrite(A, HIGH);
-  digitalWrite(B, LOW);
-  digitalWrite(C, LOW);
-  digitalWrite(D, LOW);
-  delay(50);
+  while(true);
+}
 
-  digitalWrite(A, LOW);
-  digitalWrite(B, HIGH);
-  digitalWrite(C, LOW);
-  digitalWrite(D, LOW);
-  delay(50);
+//!  speed range: [10,500]
+void wave_step(const unsigned* spd, const unsigned* steps, const boolean* cw)
+{
+  boolean arr[4] = {1,0,0,0};
+  unsigned count = *steps;
+  unsigned a,b,c,d;
 
-  digitalWrite(A, LOW);
-  digitalWrite(B, LOW);
-  digitalWrite(C, HIGH);
-  digitalWrite(D, LOW);
-  delay(50);
+  //!  specify the starting index according to the direction
+  a = 0;
+  b = 2;
+  c = *cw?  3  :  1;
+  d = *cw?  1  :  3;
   
-  digitalWrite(A, LOW);
-  digitalWrite(B, LOW);
-  digitalWrite(C, LOW);
-  digitalWrite(D, HIGH);
-  delay(50);
+  while(count--)
+  {
+    digitalWrite(A, arr[a++]);
+    digitalWrite(B, arr[b++]);
+    digitalWrite(C, arr[c++]);
+    digitalWrite(D, arr[d++]);
 
+    a %= 4;
+    b %= 4;
+    c %= 4;
+    d %= 4;
 
-
+    delay(10000/(*spd));
+  }
 }
 
 

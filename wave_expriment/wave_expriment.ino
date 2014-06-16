@@ -6,7 +6,7 @@ const int D = 11;
 int count = 12;
 
 // max speed at 20
-const unsigned width = 30;
+const unsigned width = 1000;
 
 void setup() {                
   pinMode(A, OUTPUT);     

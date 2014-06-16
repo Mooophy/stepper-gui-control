@@ -29,22 +29,17 @@ void setup() {
 
 void loop() {
 
-  generate(A, 1000, duty_arr[a]);
-  generate(C, 1000, duty_arr[b]);
-  generate(B, 1000, duty_arr[c]);
-  generate(D, 1000, duty_arr[d]);
-  
-  ++a;
-  ++b;
-  ++c;
-  ++d;
-  
+  generate(A, 1000, duty_arr[a++]);
+  generate(B, 1000, duty_arr[b++]);
+  generate(C, 1000, duty_arr[c++]);
+  generate(D, 1000, duty_arr[d++]);
+    
   a %= 32;
   b %= 32;
   c %= 32;
   d %= 32;
   
-  delay(50);
+  delay(10);
 }
 
 void generate(unsigned pin, unsigned period, unsigned duty)
