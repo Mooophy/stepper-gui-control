@@ -14,6 +14,7 @@ class State
 };
 
 void wave_step(const State* state);
+void full_step(const State* state);
 
 void setup() 
 {                
@@ -27,12 +28,12 @@ void loop()
 {
   
   State state;
-  state.spd = 300;
-  state.steps = 50;
+  state.spd = 200;
+  state.steps = 150;
   state.running = true;
-  state.cw = true;
+  state.cw = false;
   
-  wave_step(&state);
+  full_step(&state);
 
   while(true);
 }
@@ -67,4 +68,32 @@ void wave_step(const State* state)
   }
 }
 
+void full_step(const State* state)
+{
+  //!  specify the starting index according to the direction
+  unsigned a,b,c,d;
+  b = 3;
+  d = 2;
+  a = state->cw?  1  :  0;
+  c = state->cw?  0  :  1;
+  
+  //!  move steps as specified if running == true.
+  boolean arr[4] = {1,1,0,0};
+  unsigned count = state->steps;
+  while(count-- > 0 && state->running)
+  {
+    digitalWrite(A, arr[a++]);
+    digitalWrite(B, arr[b++]);
+    digitalWrite(C, arr[c++]);
+    digitalWrite(D, arr[d++]);
+
+    a %= 4;
+    b %= 4;
+    c %= 4;
+    d %= 4;
+
+    //!  speed control
+    delay(10000/(state->spd));
+  }  
+}
 
