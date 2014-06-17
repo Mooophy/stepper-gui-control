@@ -33,6 +33,8 @@ void setup()
   Serial.begin(9600);  
 }
 
+
+
 void loop() 
 {
   String cmd;
@@ -54,18 +56,12 @@ void loop()
 
 
   if(cmd.length() > 3)
-  {
-//    State state;
-//    state.spd     =  cmd[1];
-//    state.steps   =  cmd[2]<<8  +  cmd[3];
-//    state.running =  true;
-//    state.cw      =  cmd[0]  &  0x01;
-    
-  State state;
-  state.spd = cmd[1];
-  state.steps = cmd[2];
-  state.running = true;
-  state.cw = true;
+  {    
+    State state;
+    state.spd = cmd[1] * 5;
+    state.steps =  cmd[3] + (cmd[2] << 8);
+    state.running = true;
+    state.cw = cmd[0] & 0x01;
   
     wave(&state);    
   }
