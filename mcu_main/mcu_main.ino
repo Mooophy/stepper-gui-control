@@ -7,19 +7,32 @@ const int indicator = 13;
 //!  struct storing the state information
 class State
 {
-  public:  
+  public:
+  
+  State(const String& cmd):
+    spd(cmd[1] * 5),
+    steps((cmd[2] << 8) + cmd[3]),
+    running(true),
+    cw(cmd[0] & 0x10),
+    mode(cmd[0] & 0x0f)  
+  {}
+    
   unsigned spd;
   unsigned steps;
-  boolean  running;    
+  boolean  running = true;    
   boolean  cw;
+  unsigned mode;
 };
 
 void wave(const State* state);
 void full(const State* state);
 void half(const State* state);
 void micr(const State* state);
+
 void pwm(unsigned pin, unsigned period, unsigned duty);
 void indicate(boolean running);
+
+void build(String& cmd);
 
 void setup() 
 {                
@@ -38,25 +51,13 @@ void setup()
 void loop() 
 {
   String cmd;
-  while (Serial.available()) 
-  {
-    delay(3);  //delay to allow buffer to fill 
-    if (Serial.available() > 0) 
-    {
-      char c = Serial.read();  //gets one byte from serial buffer
-      cmd += c; //makes the string readString
-    } 
-  }
+  build(cmd);
 
   if(cmd.length() > 3)
   {    
-    State state;
-    state.spd = cmd[1] * 5;
-    state.steps =  cmd[3] + (cmd[2] << 8);
-    state.running = true;
-    state.cw = cmd[0] & 0x10;
+    State state(cmd);
   
-    switch (cmd[0] & 0x0f)
+    switch (state.mode)
     {
       case 1  :  wave(&state);  break;
       case 2  :  full(&state);  break;
@@ -248,4 +249,18 @@ void pwm(unsigned pin, unsigned period, unsigned duty)
 void indicate(boolean running)
 {
     digitalWrite(indicator, running);
+}
+
+//!  @brief  :  receive the command from pc.
+void build(String& cmd)
+{
+  while (Serial.available()) 
+  {
+    delay(3);  //delay to allow buffer to fill 
+    if (Serial.available() > 0) 
+    {
+      char c = Serial.read();  //gets one byte from serial buffer
+      cmd += c; //makes the string readString
+    } 
+  }
 }
