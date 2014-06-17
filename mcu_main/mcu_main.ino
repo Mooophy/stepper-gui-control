@@ -2,6 +2,7 @@ const int A = 8;
 const int B = 9;
 const int C = 10;
 const int D = 11;
+const int indicator = 13;
 
 //!  struct storing the state information
 class State
@@ -18,13 +19,16 @@ void full(const State* state);
 void half(const State* state);
 void micr(const State* state);
 void pwm(unsigned pin, unsigned period, unsigned duty);
+void indicate(boolean running);
 
 void setup() 
 {                
   pinMode(A, OUTPUT);     
   pinMode(B, OUTPUT);     
   pinMode(C, OUTPUT);     
-  pinMode(D, OUTPUT);     
+  pinMode(D, OUTPUT);
+
+  pinMode(indicator, HIGH);    
 }
 
 void loop() 
@@ -32,11 +36,12 @@ void loop()
   
   State state;
   state.spd = 500;
-  state.steps = 250;
+  state.steps = 150;
   state.running = true;
   state.cw = true;
   
-  micr(&state);
+  half(&state);
+    
 
   while(true);
 }
@@ -45,6 +50,7 @@ void loop()
 //!  @speed range:  [10,500]
 void wave(const State* state)
 {
+  indicate(true);
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
   a = 0;
@@ -70,12 +76,14 @@ void wave(const State* state)
     //!  speed control
     delay(10000/(state->spd));
   }
+  indicate(false);
 }
 
 //!  @brief :  full stepping
 //!  @speed range:  [10,500]
 void full(const State* state)
 {
+  indicate(true);
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
   a = state->cw?  1  :  0;
@@ -100,13 +108,15 @@ void full(const State* state)
 
     //!  speed control
     delay(10000/(state->spd));
-  }  
+  }
+  indicate(false);  
 }
 
 //!  @brief :  half stepping
 //!  @speed range:  [10,500]
 void half(const State* state)
-{  
+{
+  indicate(true);  
   //!  specify the starting index according to the direction
   int a = 0, c = 2, b = 4, d = 6;
   
@@ -143,12 +153,14 @@ void half(const State* state)
     //!  speed control
     delay(10000/(state->spd));
   }
+  indicate(false);
 }
 
 //!  @brief :  micro stepping
 //!  @speed range:  [10,500]
 void micr(const State* state)
 {
+    indicate(true);
     //!  specify the starting index according to the direction  	
     const unsigned arr[32] = 
     {500, 625, 750, 875, 1000, 875, 750, 625, 500, 375, 250, 125, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0 ,0, 125, 250, 375};
@@ -162,7 +174,7 @@ void micr(const State* state)
     unsigned period  =  1000;
     unsigned count   =  state->steps;
     while(count-- > 0 && state->running)
-    {
+    {        
         if(!state->cw)
         {
             pwm(A, period, arr[a++]);
@@ -190,8 +202,8 @@ void micr(const State* state)
 
       //!  speed control
       delay(10000/(state->spd));
-    }    
-
+    }
+    indicate(false);    
 }
 
 //!  @brief  :  pwm signal generation
@@ -202,4 +214,9 @@ void pwm(unsigned pin, unsigned period, unsigned duty)
   
     digitalWrite(pin, LOW);
     delayMicroseconds(period - duty);  
+}
+
+void indicate(boolean running)
+{
+    digitalWrite(indicator, running);
 }
