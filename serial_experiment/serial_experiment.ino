@@ -4,5 +4,5 @@ void setup(){
 
 void loop()
 {
-  Serial.write(45); // send a byte with the value 45
+  Serial.write("84\r\n"); // send a byte with the value 45
 }
