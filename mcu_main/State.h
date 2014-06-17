@@ -5,8 +5,7 @@
 
 class State
 {
-public:
-  
+public: 
   	//!  @ctor
   	//!  @brief  :  decode cmd to generate the state.
   	State(const String& cmd):
@@ -23,10 +22,5 @@ public:
 	bool  running;    
 	bool  cw;
 	unsigned mode;
-
-		
-
 };
-
-
 #endif //STATE_H
