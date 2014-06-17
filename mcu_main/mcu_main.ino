@@ -28,22 +28,55 @@ void setup()
   pinMode(C, OUTPUT);     
   pinMode(D, OUTPUT);
 
-  pinMode(indicator, HIGH);    
+  pinMode(indicator, HIGH);
+
+  Serial.begin(9600);  
 }
 
 void loop() 
 {
+  String cmd;
+  while (Serial.available()) 
+  {
+    delay(3);  //delay to allow buffer to fill 
+    if (Serial.available() > 0) 
+    {
+      char c = Serial.read();  //gets one byte from serial buffer
+      cmd += c; //makes the string readString
+    } 
+  }
+
+  if(cmd.length() > 0) 
+  {
+    Serial.println(cmd); //see what was received
+  }  
   
+
+
+  if(cmd.length() > 3)
+  {
+//    State state;
+//    state.spd     =  cmd[1];
+//    state.steps   =  cmd[2]<<8  +  cmd[3];
+//    state.running =  true;
+//    state.cw      =  cmd[0]  &  0x01;
+    
   State state;
-  state.spd = 500;
-  state.steps = 150;
+  state.spd = cmd[1];
+  state.steps = cmd[2];
   state.running = true;
   state.cw = true;
   
-  half(&state);
+    wave(&state);    
+  }
+  
+  if(cmd.length() > 0) 
+  {
+    Serial.println(cmd); //see what was received
+  }  
+  
+  
     
-
-  while(true);
 }
 
 //!  @brief :  wave stepping
