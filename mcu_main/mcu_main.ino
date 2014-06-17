@@ -16,6 +16,8 @@ class State
 void wave(const State* state);
 void full(const State* state);
 void half(const State* state);
+void micr(const State* state);
+void pwm(unsigned pin, unsigned period, unsigned duty);
 
 void setup() 
 {                
@@ -34,12 +36,13 @@ void loop()
   state.running = true;
   state.cw = true;
   
-  half(&state);
+  micr(&state);
 
   while(true);
 }
 
-//!  speed range: [10,500]
+//!  @brief :  wave stepping
+//!  @speed range:  [10,500]
 void wave(const State* state)
 {
   //!  specify the starting index according to the direction
@@ -69,7 +72,8 @@ void wave(const State* state)
   }
 }
 
-//!  speed range: [10,500]
+//!  @brief :  full stepping
+//!  @speed range:  [10,500]
 void full(const State* state)
 {
   //!  specify the starting index according to the direction
@@ -99,13 +103,14 @@ void full(const State* state)
   }  
 }
 
-//!  speed range: [10,500]
+//!  @brief :  half stepping
+//!  @speed range:  [10,500]
 void half(const State* state)
 {  
   //!  specify the starting index according to the direction
   int a = 0, c = 2, b = 4, d = 6;
   
-    //!  move steps as specified if running == true.
+  //!  move steps as specified if running == true.
   boolean arr[8] = {1,1,1,0, 0,0,0,0};
   unsigned count = state->steps;
   while(count-- > 0 && state->running)
@@ -137,7 +142,64 @@ void half(const State* state)
 
     //!  speed control
     delay(10000/(state->spd));
-  }  
+  }
+}
+
+//!  @brief :  micro stepping
+//!  @speed range:  [10,500]
+void micr(const State* state)
+{
+    //!  specify the starting index according to the direction  	
+    const unsigned arr[32] = 
+    {500, 625, 750, 875, 1000, 875, 750, 625, 500, 375, 250, 125, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0 ,0, 125, 250, 375};
+    //^0-a                                    ^8-c                         ^16-b             ^24-d 
+    int a  =  0;
+    int b  =  16;
+    int c  =  8;
+    int d  =  24;
+    
+    //!  move steps as specified if running == true.
+    unsigned period  =  1000;
+    unsigned count   =  state->steps;
+    while(count-- > 0 && state->running)
+    {
+        if(!state->cw)
+        {
+            pwm(A, period, arr[a++]);
+            pwm(B, period, arr[b++]);
+            pwm(C, period, arr[c++]);
+            pwm(D, period, arr[d++]);
+
+            a %= 32;
+            b %= 32;
+            c %= 32;
+            d %= 32;
+        }
+        else  //ccw
+        {
+            pwm(A, period, arr[a--]);
+            pwm(B, period, arr[b--]);
+            pwm(C, period, arr[c--]);
+            pwm(D, period, arr[d--]);
+            
+            if(a < 0)  a = 31;
+            if(b < 0)  b = 31;
+            if(c < 0)  c = 31;
+            if(d < 0)  d = 31;    
+        }
+
+      //!  speed control
+      delay(10000/(state->spd));
+    }    
+
+}
+
+//!  @brief  :  pwm signal generation
+void pwm(unsigned pin, unsigned period, unsigned duty)
+{
+    digitalWrite(pin, HIGH);
+    delayMicroseconds(duty);
   
-  
+    digitalWrite(pin, LOW);
+    delayMicroseconds(period - duty);  
 }
