@@ -63,7 +63,13 @@ void loop()
     state.running = true;
     state.cw = cmd[0] & 0x01;
   
-    wave(&state);    
+    switch (cmd[0] >> 4)
+    {
+      case 1  :  micr(&state);  break;
+      case 2  :  half(&state);  break;
+      case 4  :  full(&state);  break;
+      case 8  :  wave(&state);  break;
+    }
   }
   
   if(cmd.length() > 0) 
