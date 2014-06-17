@@ -1,28 +1,10 @@
+#include "State.h"
+
 const int A = 8;
 const int B = 9;
 const int C = 10;
 const int D = 11;
 const int indicator = 13;
-
-//!  struct storing the state information
-class State
-{
-  public:
-  
-  State(const String& cmd):
-    spd(cmd[1] * 5),
-    steps((cmd[2] << 8) + cmd[3]),
-    running(true),
-    cw(cmd[0] & 0x10),
-    mode(cmd[0] & 0x0f)  
-  {}
-    
-  unsigned spd;
-  unsigned steps;
-  boolean  running = true;    
-  boolean  cw;
-  unsigned mode;
-};
 
 void wave(const State* state);
 void full(const State* state);
@@ -52,27 +34,20 @@ void loop()
 {
   String cmd;
   build(cmd);
-
-  if(cmd.length() > 3)
-  {    
-    State state(cmd);
   
-    switch (state.mode)
-    {
-      case 1  :  wave(&state);  break;
-      case 2  :  full(&state);  break;
-      case 4  :  half(&state);  break;
-      case 8  :  micr(&state);  break;
-    }
+  State state(cmd);  
+  switch (state.mode)
+  {
+    case 1  :  wave(&state);  break;
+    case 2  :  full(&state);  break;
+    case 4  :  half(&state);  break;
+    case 8  :  micr(&state);  break;
   }
   
   if(cmd.length() > 0) 
   {
     Serial.println(cmd); //see what was received
   }  
-  
-  
-    
 }
 
 //!  @brief :  wave stepping
