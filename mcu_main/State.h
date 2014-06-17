@@ -5,23 +5,27 @@
 
 class State
 {
-  public:
+public:
   
-  //!  @ctor
-  //!  @brief  :  decode cmd to generate the state.
-  State(const String& cmd):
-    spd(cmd[1] * 5),
-    steps((cmd[2] << 8) + cmd[3]),
-    running(true),
-    cw(cmd[0] & 0x10),
-    mode(cmd[0] & 0x0f)  
-  {}
-    
-  unsigned spd;
-  unsigned steps;
-  bool  running;    
-  bool  cw;
-  unsigned mode;
+  	//!  @ctor
+  	//!  @brief  :  decode cmd to generate the state.
+  	State(const String& cmd):
+    		spd(cmd[1] * 5),
+    		steps((cmd[2] << 8) + cmd[3]),
+    		running(true),
+    		cw(cmd[0] & 0x10),
+    		mode(cmd[0] & 0x0f)  
+  	{}
+
+	
+	unsigned spd;
+	unsigned steps;
+	bool  running;    
+	bool  cw;
+	unsigned mode;
+
+		
+
 };
 
 
