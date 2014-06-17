@@ -216,6 +216,7 @@ void pwm(unsigned pin, unsigned period, unsigned duty)
     delayMicroseconds(period - duty);  
 }
 
+//!  @brief  :  operate the built-in led i.e. pin 13
 void indicate(boolean running)
 {
     digitalWrite(indicator, running);
