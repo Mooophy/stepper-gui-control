@@ -14,13 +14,11 @@ bit 5 : 	undefined
 bit 6 : 	undefined
 bit 7 : 	undefined
 
-
-
 speed bits layout:
 bit 0 - 7  represents a number 0 - 255, 
-can be used as a speed input  [0 - 100].
+used as a speed input  [0 - 100].
 
 steps bits layout:
 bit 0 - 15 represents a number 0 - 65535,
-can be used as a steps input [0 - ?].
+used as a steps input [0 - ?].
 	  
