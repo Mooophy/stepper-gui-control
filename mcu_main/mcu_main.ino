@@ -61,14 +61,14 @@ void loop()
     state.spd = cmd[1] * 5;
     state.steps =  cmd[3] + (cmd[2] << 8);
     state.running = true;
-    state.cw = cmd[0] & 0x01;
+    state.cw = cmd[0] & 0x10;
   
-    switch (cmd[0] >> 4)
+    switch (cmd[0] & 0x0f)
     {
-      case 1  :  micr(&state);  break;
-      case 2  :  half(&state);  break;
-      case 4  :  full(&state);  break;
-      case 8  :  wave(&state);  break;
+      case 1  :  wave(&state);  break;
+      case 2  :  full(&state);  break;
+      case 4  :  half(&state);  break;
+      case 8  :  micr(&state);  break;
     }
   }
   
