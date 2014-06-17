@@ -48,13 +48,6 @@ void loop()
     } 
   }
 
-  if(cmd.length() > 0) 
-  {
-    Serial.println(cmd); //see what was received
-  }  
-  
-
-
   if(cmd.length() > 3)
   {    
     State state;
