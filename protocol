@@ -5,14 +5,16 @@ PC -> Arduino:
 7 6 5 4 3 2 1 0	    
 
 mode bits layout:
-bit 0 :		1 : CW, 0 : CCW
-bit 1 : 	undefined
-bit 2 : 	undefined
-bit 3 : 	undefined
-bit 4 : 	1 : uStep
-bit 5 : 	1 : hStep
-bit 6 : 	1 : fStep
-bit 7 : 	1 : wave
+bit 0 :		1 : wave
+bit 1 : 	1 : full
+bit 2 : 	1 : half
+bit 3 : 	1 : micr	
+bit 4 : 	1 : CW, 0 : CCW
+bit 5 : 	undefined
+bit 6 : 	undefined
+bit 7 : 	undefined
+
+
 
 speed bits layout:
 bit 0 - 7  represents a number 0 - 255, 
