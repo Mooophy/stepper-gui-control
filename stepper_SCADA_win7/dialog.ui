@@ -6,17 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>711</width>
+    <width>700</width>
     <height>300</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>700</width>
+    <height>300</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Steppers Control</string>
   </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>590</x>
+     <x>580</x>
      <y>180</y>
      <width>91</width>
      <height>81</height>
@@ -26,14 +38,29 @@
     <string>Go</string>
    </property>
   </widget>
-  <widget class="QSlider" name="horizontalSlider">
+  <widget class="QSlider" name="slider_speed">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>30</x>
      <y>190</y>
-     <width>521</width>
+     <width>441</width>
      <height>19</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Speed Input&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="minimum">
+    <number>2</number>
+   </property>
+   <property name="maximum">
+    <number>100</number>
+   </property>
+   <property name="value">
+    <number>20</number>
+   </property>
+   <property name="sliderPosition">
+    <number>20</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -42,115 +69,136 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>500</x>
      <y>20</y>
      <width>161</width>
      <height>131</height>
     </rect>
    </property>
    <property name="title">
-    <string>GroupBox</string>
+    <string>Mode</string>
    </property>
-   <widget class="QRadioButton" name="radioButton_4">
+   <widget class="QRadioButton" name="radioButton_micro">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>90</y>
       <width>89</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>RadioButton</string>
+     <string>Micro</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="radioButton_full">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>50</y>
       <width>89</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>RadioButton</string>
+     <string>Full</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_3">
+   <widget class="QRadioButton" name="radioButton_half">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>70</y>
       <width>89</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>RadioButton</string>
+     <string>Half</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="radioButton_wave">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>30</y>
       <width>89</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>RadioButton</string>
+     <string>Wave</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>300</x>
      <y>20</y>
      <width>161</width>
      <height>131</height>
     </rect>
    </property>
    <property name="title">
-    <string>GroupBox</string>
+    <string>Direction</string>
    </property>
-   <widget class="QRadioButton" name="radioButton_5">
+   <widget class="QRadioButton" name="radioButton_cw">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>40</y>
       <width>89</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>RadioButton</string>
+     <string>CW</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_6">
+   <widget class="QRadioButton" name="radioButton_ccw">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>70</y>
       <width>89</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>RadioButton</string>
+     <string>CCW</string>
     </property>
    </widget>
   </widget>
-  <widget class="QSlider" name="horizontalSlider_2">
+  <widget class="QSlider" name="slider_steps">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>30</x>
      <y>230</y>
-     <width>521</width>
+     <width>441</width>
      <height>19</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Steps Input&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="minimum">
+    <number>5</number>
+   </property>
+   <property name="maximum">
+    <number>60000</number>
+   </property>
+   <property name="value">
+    <number>100</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -159,7 +207,7 @@
   <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>30</x>
      <y>20</y>
      <width>231</width>
      <height>131</height>
@@ -195,6 +243,32 @@
     </property>
    </widget>
   </widget>
+  <widget class="QLabel" name="label_speed">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>190</y>
+     <width>31</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>20%</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_steps">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>230</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>100 steps</string>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
@@ -222,8 +296,8 @@
    <slot>uartTest()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>163</x>
-     <y>125</y>
+     <x>133</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
      <x>248</x>
@@ -231,9 +305,43 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>slider_speed</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Dialog</receiver>
+   <slot>speedChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>366</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>slider_steps</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Dialog</receiver>
+   <slot>stepsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>pushButtonClicked()</slot>
   <slot>uartTest()</slot>
+  <slot>speedChanged()</slot>
+  <slot>stepsChanged()</slot>
  </slots>
 </ui>

@@ -20,6 +20,8 @@ public slots:
 void pushButtonClicked();
 void serialDataReady();
 void uartTest();
+void speedChanged();
+void stepsChanged();
 
 private:
     Ui::Dialog *ui;

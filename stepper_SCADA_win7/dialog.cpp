@@ -40,6 +40,8 @@ void Dialog::pushButtonClicked(void)
      */
     QByteArray cmd(4,0);
 
+
+
     //! mode and direction
     cmd[0]  = 0x11;
 
@@ -48,7 +50,7 @@ void Dialog::pushButtonClicked(void)
 
     //! steps:  [0,100] and [1,100]
     cmd[2]  = 0;
-    cmd[3]  = 50;
+    cmd[3]  = 100;
 
     port->write(cmd);
 }
@@ -81,5 +83,19 @@ void Dialog::uartTest()
 {
     QByteArray test(1,'C');
     port->write(test);
+}
+
+void Dialog::speedChanged()
+{
+    QString speed = QString::number(ui->slider_speed->value());
+    speed += "%";
+    ui->label_speed->setText(speed);
+}
+
+void Dialog::stepsChanged()
+{
+    QString steps = QString::number(ui->slider_steps->value());
+    steps += " steps";
+    ui->label_steps->setText(steps);
 }
 
