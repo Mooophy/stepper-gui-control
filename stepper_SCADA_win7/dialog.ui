@@ -57,10 +57,10 @@
     <number>100</number>
    </property>
    <property name="value">
-    <number>20</number>
+    <number>60</number>
    </property>
    <property name="sliderPosition">
-    <number>20</number>
+    <number>60</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -253,7 +253,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>20%</string>
+    <string>60%</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_steps">
