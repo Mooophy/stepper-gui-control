@@ -22,13 +22,10 @@ void setup()
   pinMode(B, OUTPUT);     
   pinMode(C, OUTPUT);     
   pinMode(D, OUTPUT);
-
   pinMode(indicator, HIGH);
 
   Serial.begin(9600);  
 }
-
-
 
 void loop() 
 {
@@ -36,10 +33,7 @@ void loop()
   build(cmd);
   
   //!  uart checking
-  if(cmd[0] == 'C')  
-  {
-    Serial.println(cmd);
-  }  
+  if(cmd[0] == 'C')  Serial.println(cmd); 
   
   State state(cmd);  
   switch (state.mode)
@@ -48,13 +42,9 @@ void loop()
     case 2  :  full(&state);  break;
     case 4  :  half(&state);  break;
     case 8  :  micr(&state);  break;
-  }
-  
-  if(cmd.length() > 3) 
-  {
-    Serial.println(cmd); //see what was received
   }  
 }
+
 
 //!  @brief :  wave stepping
 //!  @speed range:  [10,500]
