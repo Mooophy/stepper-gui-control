@@ -35,6 +35,12 @@ void loop()
   String cmd;
   build(cmd);
   
+  //!  uart checking
+  if(cmd[0] == 'C')  
+  {
+    Serial.println(cmd);
+  }  
+  
   State state(cmd);  
   switch (state.mode)
   {
@@ -44,7 +50,7 @@ void loop()
     case 8  :  micr(&state);  break;
   }
   
-  if(cmd.length() > 0) 
+  if(cmd.length() > 3) 
   {
     Serial.println(cmd); //see what was received
   }  

@@ -2,6 +2,9 @@
 #include "ui_dialog.h"
 #include <string>
 
+/**
+ * @brief ctor
+ */
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
@@ -14,12 +17,20 @@ Dialog::Dialog(QWidget *parent) :
 
 }
 
+/**
+ * @brief dtor
+ */
 Dialog::~Dialog()
 {
     delete ui;
     delete port;
 }
 
+/**
+ * @brief pushButtonClicked
+ *
+ * slot for command sending
+ */
 void Dialog::pushButtonClicked(void)
 {
     /**
@@ -30,7 +41,7 @@ void Dialog::pushButtonClicked(void)
     QByteArray cmd(4,0);
 
     //! mode and direction
-    cmd[0]  = 0x18;
+    cmd[0]  = 0x11;
 
     //! speed:  [2,100]
     cmd[1]  = 80;
@@ -42,13 +53,33 @@ void Dialog::pushButtonClicked(void)
     port->write(cmd);
 }
 
+/**
+ * @brief serialDataReady
+ *
+ * slot when data is being receiving
+ */
 void Dialog::serialDataReady()
 {
     if (port->canReadLine()) {
         char s[80];
         port->readLine(s, 80);
         s[strlen(s)-1] = '\0';
-        ui->label->setText(s);
+
+        if(strlen(s) > 0)
+        {
+            ui->label->setText("Uart State : Working!");
+        }
     }
+}
+
+/**
+ * @brief uartTest
+ *
+ * slot for uart test
+ */
+void Dialog::uartTest()
+{
+    QByteArray test(1,'C');
+    port->write(test);
 }
 
