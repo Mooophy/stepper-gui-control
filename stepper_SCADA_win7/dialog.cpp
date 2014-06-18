@@ -40,17 +40,24 @@ void Dialog::pushButtonClicked(void)
      */
     QByteArray cmd(4,0);
 
+    bool wave   =   ui->radioButton_wave->isChecked();
+    bool full   =   ui->radioButton_full->isChecked();
+    bool half   =   ui->radioButton_half->isChecked();
+    bool mirc   =   ui->radioButton_micr->isChecked();
 
+    bool cw     =   ui->radioButton_cw->isChecked();
 
     //! mode and direction
-    cmd[0]  = 0x11;
+    //cmd[0]  = 0x11;
+    cmd[0]  = (cw<<4) + (mirc<<3) + (half<<2) + (full<<1) + (wave<<0);
 
     //! speed:  [2,100]
-    cmd[1]  = 80;
+    cmd[1]  = ui->slider_speed->value();
 
     //! steps:  [0,100] and [1,100]
-    cmd[2]  = 0;
-    cmd[3]  = 100;
+    cmd[2]  = ui->slider_steps->value() >> 8;
+    cmd[3]  = ui->slider_steps->value() >> 0;
+
 
     port->write(cmd);
 }
@@ -92,6 +99,9 @@ void Dialog::speedChanged()
     ui->label_speed->setText(speed);
 }
 
+/**
+ * @brief Dialog::stepsChanged
+ */
 void Dialog::stepsChanged()
 {
     QString steps = QString::number(ui->slider_steps->value());
