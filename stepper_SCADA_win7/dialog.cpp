@@ -1,5 +1,6 @@
 #include "dialog.h"
 #include "ui_dialog.h"
+#include <string>
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -19,12 +20,30 @@ Dialog::~Dialog()
     delete port;
 }
 
-void Dialog::pushButtonClicked(void) {
-    QByteArray qba = (ui->lineEdit->text() + '\n').toLatin1();
-    port->write(qba.data());
+void Dialog::pushButtonClicked(void)
+{
+    /**
+     * @brief command encoding
+     *
+     *  check the protocol file for detail
+     */
+    QByteArray cmd(4,0);
+
+    //! mode and direction
+    cmd[0]  = 0x18;
+
+    //! speed:  [2,100]
+    cmd[1]  = 80;
+
+    //! steps:  [0,100] and [1,100]
+    cmd[2]  = 0;
+    cmd[3]  = 50;
+
+    port->write(cmd);
 }
 
-void Dialog::serialDataReady() {
+void Dialog::serialDataReady()
+{
     if (port->canReadLine()) {
         char s[80];
         port->readLine(s, 80);
