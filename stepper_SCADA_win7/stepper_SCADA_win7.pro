@@ -18,3 +18,6 @@ SOURCES += main.cpp\
 HEADERS  += dialog.h
 
 FORMS    += dialog.ui
+
+# this one must be added @alan.
+include ( qextserialport/qextserialport.pri)

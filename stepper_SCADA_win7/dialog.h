@@ -2,6 +2,7 @@
 #define DIALOG_H
 
 #include <QDialog>
+#include "qextserialport.h"
 
 namespace Ui {
 class Dialog;
@@ -14,9 +15,14 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = 0);
     ~Dialog();
-    
+
+public slots:
+void pushButtonClicked();
+void serialDataReady();
+
 private:
     Ui::Dialog *ui;
+    QextSerialPort *port;
 };
 
 #endif // DIALOG_H
