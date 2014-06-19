@@ -9,6 +9,9 @@ const int B = 9;
 const int C = 10;
 const int D = 11;
 
+/**
+ * @brief The State class
+ */
 class State
 {
 public: 
@@ -28,7 +31,7 @@ public:
 	bool  cw;
 	unsigned mode;
 
-        void pwm(unsigned pin, unsigned period, unsigned duty);
+    void pwm(unsigned pin, unsigned period, unsigned duty);
 };
 
 void wave(const State* state);

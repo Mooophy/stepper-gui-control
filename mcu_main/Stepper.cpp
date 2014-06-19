@@ -1,10 +1,8 @@
 #include "Stepper.h"
 
-
-
-
-//!  @brief :  wave stepping
-//!  @speed range:  [10,500]
+/**
+ * @brief wave
+ */
 void wave(const State* state)
 {
   //!  specify the starting index according to the direction
@@ -34,8 +32,9 @@ void wave(const State* state)
   }
 }
 
-//!  @brief :  full stepping
-//!  @speed range:  [10,500]
+/**
+ * @brief full
+ */
 void full(const State* state)
 {
   //!  specify the starting index according to the direction
@@ -65,8 +64,9 @@ void full(const State* state)
   }
 }
 
-//!  @brief :  half stepping
-//!  @speed range:  [10,500]
+/**
+ * @brief half
+ */
 void half(const State* state)
 {
   //!  specify the starting index according to the direction
@@ -107,8 +107,9 @@ void half(const State* state)
   }
 }
 
-//!  @brief :  micro stepping
-//!  @speed range:  [10,500]
+/**
+ * @brief micr
+ */
 void micr(const State* state)
 {
     //!  specify the starting index according to the direction  	
@@ -155,7 +156,9 @@ void micr(const State* state)
     }   
 }
 
-//!  @brief  :  pwm signal generation
+/**
+ * @brief pwm
+ */
 void pwm(unsigned pin, unsigned period, unsigned duty)
 {
     digitalWrite(pin, HIGH);
@@ -166,7 +169,9 @@ void pwm(unsigned pin, unsigned period, unsigned duty)
 }
 
 
-//!  @brief  :  receive the command from pc.
+/**
+ * @brief build
+ */
 void build(String& cmd)
 {
   while (Serial.available()) 
