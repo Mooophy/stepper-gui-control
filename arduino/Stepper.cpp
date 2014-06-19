@@ -21,14 +21,14 @@ void wave_stepping(const Stepper* stepper)
   d = stepper->cw?  1  :  3;
   
   //!  move steps as specified if running == true.
-  bool arr[4] = {1,0,0,0};
+  bool container[4] = {1,0,0,0};
   unsigned count = stepper->steps;
   while(count-- > 0 && stepper->running)
   {
-    digitalWrite(A, arr[a++]);
-    digitalWrite(B, arr[b++]);
-    digitalWrite(C, arr[c++]);
-    digitalWrite(D, arr[d++]);
+    digitalWrite(A, container[a++]);
+    digitalWrite(B, container[b++]);
+    digitalWrite(C, container[c++]);
+    digitalWrite(D, container[d++]);
 
     a %= 4;
     b %= 4;
@@ -53,14 +53,14 @@ void full_stepping(const Stepper* stepper)
   d = stepper->cw?  2  :  3;
   
   //!  move steps as specified if running == true.
-  boolean arr[4] = {1,1,0,0};
+  boolean container[4] = {1,1,0,0};
   unsigned count = stepper->steps;
   while(count-- > 0 && stepper->running)
   {
-    digitalWrite(A, arr[a++]);
-    digitalWrite(B, arr[b++]);
-    digitalWrite(C, arr[c++]);
-    digitalWrite(D, arr[d++]);
+    digitalWrite(A, container[a++]);
+    digitalWrite(B, container[b++]);
+    digitalWrite(C, container[c++]);
+    digitalWrite(D, container[d++]);
 
     a %= 4;
     b %= 4;
@@ -81,16 +81,16 @@ void half_stepping(const Stepper* stepper)
   int a = 0, c = 2, b = 4, d = 6;
   
   //!  move steps as specified if running == true.
-  boolean arr[8] = {1,1,1,0, 0,0,0,0};
+  boolean container[8] = {1,1,1,0, 0,0,0,0};
   unsigned count = stepper->steps;
   while(count-- > 0 && stepper->running)
   {
       if(!stepper->cw)
       {
-            digitalWrite(A, arr[a++]);
-            digitalWrite(B, arr[b++]);
-            digitalWrite(C, arr[c++]);
-            digitalWrite(D, arr[d++]);
+            digitalWrite(A, container[a++]);
+            digitalWrite(B, container[b++]);
+            digitalWrite(C, container[c++]);
+            digitalWrite(D, container[d++]);
 
             a %= 8;
             b %= 8;
@@ -99,10 +99,10 @@ void half_stepping(const Stepper* stepper)
       }
       else
       {
-            digitalWrite(A, arr[a--]);
-            digitalWrite(B, arr[b--]);
-            digitalWrite(C, arr[c--]);
-            digitalWrite(D, arr[d--]);
+            digitalWrite(A, container[a--]);
+            digitalWrite(B, container[b--]);
+            digitalWrite(C, container[c--]);
+            digitalWrite(D, container[d--]);
 
             if(a < 0)  a = 7;
             if(b < 0)  b = 7;
@@ -121,7 +121,7 @@ void half_stepping(const Stepper* stepper)
 void micr_stepping(const Stepper* stepper)
 {
     //!  specify the starting index according to the direction  	
-    const unsigned arr[32] = 
+    const unsigned container[32] =
     {500, 625, 750, 875, 1000, 875, 750, 625, 500, 375, 250, 125, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0 ,0, 125, 250, 375};
     //^0-a                                    ^8-c                         ^16-b             ^24-d 
     int a  =  0;
@@ -136,10 +136,10 @@ void micr_stepping(const Stepper* stepper)
     {        
         if(!stepper->cw)
         {
-            pwm(A, period, arr[a++]);
-            pwm(B, period, arr[b++]);
-            pwm(C, period, arr[c++]);
-            pwm(D, period, arr[d++]);
+            pwm(A, period, container[a++]);
+            pwm(B, period, container[b++]);
+            pwm(C, period, container[c++]);
+            pwm(D, period, container[d++]);
 
             a %= 32;
             b %= 32;
@@ -148,10 +148,10 @@ void micr_stepping(const Stepper* stepper)
         }
         else  //ccw
         {
-            pwm(A, period, arr[a--]);
-            pwm(B, period, arr[b--]);
-            pwm(C, period, arr[c--]);
-            pwm(D, period, arr[d--]);
+            pwm(A, period, container[a--]);
+            pwm(B, period, container[b--]);
+            pwm(C, period, container[c--]);
+            pwm(D, period, container[d--]);
             
             if(a < 0)  a = 31;
             if(b < 0)  b = 31;
