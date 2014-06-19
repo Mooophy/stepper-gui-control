@@ -1,3 +1,11 @@
+	
+/***************************************************************************
+ *  @file       Stepper.h
+ *  @author     Yue Wang
+ *  @date       15  June 2014
+ *  @remark     Implemented for project 2, 282.478
+ *  @note       
+ ***************************************************************************/
 #include "Stepper.h"
 
 void setup() 
@@ -15,13 +23,13 @@ void loop()
   String command;
   build(command);
   
-  State state(command);  
-  switch (state.mode)
+  Stepper stepper(command);  
+  switch (stepper.mode)
   {
-    case 1  :  wave(&state);  break;
-    case 2  :  full(&state);  break;
-    case 4  :  half(&state);  break;
-    case 8  :  micr(&state);  break;
+    case 1  :  wave_stepping(&stepper);  break;
+    case 2  :  full_stepping(&stepper);  break;
+    case 4  :  half_stepping(&stepper);  break;
+    case 8  :  micr_stepping(&stepper);  break;
   }
   
   if(command.length() > 0) 

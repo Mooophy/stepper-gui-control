@@ -1,21 +1,30 @@
+	
+/***************************************************************************
+ *  @file       Stepper.cpp
+ *  @author     Yue Wang
+ *  @date       15  June 2014
+ *  @remark     Implemented for project 2, 282.478
+ *  @note       
+ ***************************************************************************/
+
 #include "Stepper.h"
 
 /**
  * @brief wave
  */
-void wave(const State* state)
+void wave_stepping(const Stepper* stepper)
 {
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
   a = 0;
   b = 2;
-  c = state->cw?  3  :  1;
-  d = state->cw?  1  :  3;
+  c = stepper->cw?  3  :  1;
+  d = stepper->cw?  1  :  3;
   
   //!  move steps as specified if running == true.
   bool arr[4] = {1,0,0,0};
-  unsigned count = state->steps;
-  while(count-- > 0 && state->running)
+  unsigned count = stepper->steps;
+  while(count-- > 0 && stepper->running)
   {
     digitalWrite(A, arr[a++]);
     digitalWrite(B, arr[b++]);
@@ -28,26 +37,26 @@ void wave(const State* state)
     d %= 4;
 
     //!  speed control
-    delay(10000/(state->spd));
+    delay(10000/(stepper->spd));
   }
 }
 
 /**
  * @brief full
  */
-void full(const State* state)
+void full_stepping(const Stepper* stepper)
 {
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
-  a = state->cw?  1  :  0;
-  c = state->cw?  0  :  1;  
-  b = state->cw?  3  :  2;
-  d = state->cw?  2  :  3;
+  a = stepper->cw?  1  :  0;
+  c = stepper->cw?  0  :  1;
+  b = stepper->cw?  3  :  2;
+  d = stepper->cw?  2  :  3;
   
   //!  move steps as specified if running == true.
   boolean arr[4] = {1,1,0,0};
-  unsigned count = state->steps;
-  while(count-- > 0 && state->running)
+  unsigned count = stepper->steps;
+  while(count-- > 0 && stepper->running)
   {
     digitalWrite(A, arr[a++]);
     digitalWrite(B, arr[b++]);
@@ -60,24 +69,24 @@ void full(const State* state)
     d %= 4;
 
     //!  speed control
-    delay(10000/(state->spd));
+    delay(10000/(stepper->spd));
   }
 }
 
 /**
  * @brief half
  */
-void half(const State* state)
+void half_stepping(const Stepper* stepper)
 {
   //!  specify the starting index according to the direction
   int a = 0, c = 2, b = 4, d = 6;
   
   //!  move steps as specified if running == true.
   boolean arr[8] = {1,1,1,0, 0,0,0,0};
-  unsigned count = state->steps;
-  while(count-- > 0 && state->running)
+  unsigned count = stepper->steps;
+  while(count-- > 0 && stepper->running)
   {
-      if(!state->cw)
+      if(!stepper->cw)
       {
             digitalWrite(A, arr[a++]);
             digitalWrite(B, arr[b++]);
@@ -103,14 +112,14 @@ void half(const State* state)
       }
 
     //!  speed control
-    delay(10000/(state->spd));
+    delay(10000/(stepper->spd));
   }
 }
 
 /**
  * @brief micr
  */
-void micr(const State* state)
+void micr_stepping(const Stepper* stepper)
 {
     //!  specify the starting index according to the direction  	
     const unsigned arr[32] = 
@@ -123,10 +132,10 @@ void micr(const State* state)
     
     //!  move steps as specified if running == true.
     unsigned period  =  1000;
-    unsigned count   =  state->steps;
-    while(count-- > 0 && state->running)
+    unsigned count   =  stepper->steps;
+    while(count-- > 0 && stepper->running)
     {        
-        if(!state->cw)
+        if(!stepper->cw)
         {
             pwm(A, period, arr[a++]);
             pwm(B, period, arr[b++]);
@@ -152,7 +161,7 @@ void micr(const State* state)
         }
 
       //!  speed control
-      delay(10000/(state->spd));
+      delay(10000/(stepper->spd));
     }   
 }
 

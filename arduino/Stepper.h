@@ -1,3 +1,12 @@
+	
+/***************************************************************************
+ *  @file       Stepper.h
+ *  @author     Yue Wang
+ *  @date       15  June 2014
+ *  @remark     Implemented for project 2, 282.478
+ *  @note       
+ ***************************************************************************/
+
 #ifndef STATE_H
 #define STATE_H
 
@@ -12,12 +21,12 @@ const int D = 11;
 /**
  * @brief The State class
  */
-class State
+class Stepper
 {
 public: 
   	//!  @ctor
   	//!  @brief  :  decode cmd to generate the state.
-  	State(const String& cmd):
+  	Stepper(const String& cmd):
     		spd(cmd[1] * 5),
     		steps(10 * cmd[3]),
     		running(true),
@@ -31,13 +40,13 @@ public:
 	bool  cw;
 	unsigned mode;
 
-    void pwm(unsigned pin, unsigned period, unsigned duty);
+    	void pwm(unsigned pin, unsigned period, unsigned duty);
 };
 
-void wave(const State* state);
-void full(const State* state);
-void half(const State* state);
-void micr(const State* state);
+void wave_stepping(const Stepper* stepper);
+void full_stepping(const Stepper* stepper);
+void half_stepping(const Stepper* stepper);
+void micr_stepping(const Stepper* stepper);
 
 void pwm(unsigned pin, unsigned period, unsigned duty);
 void build(String& cmd);
