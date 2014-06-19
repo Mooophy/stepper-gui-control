@@ -2,6 +2,7 @@
 #define DIALOG_H
 
 #include <QDialog>
+#include "Serial.hpp"
 
 namespace Ui {
 class Dialog;
@@ -15,8 +16,14 @@ public:
     explicit Dialog(QWidget *parent = 0);
     ~Dialog();
 
+public slots:
+    void startClicked();
+    void speedChanged(int speed);
+    void stepsChanged(int steps);
+
 private:
     Ui::Dialog *ui;
+    SimpleSerial conn;
 };
 
 #endif // DIALOG_H

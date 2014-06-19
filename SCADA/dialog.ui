@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Stepper Contoller for 282.478 Project IIs </string>
+   <string>Stepper Contoller for 282.478 Project II </string>
   </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
@@ -38,7 +38,7 @@
    <property name="title">
     <string>Stepper Modes</string>
    </property>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="wav">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -54,7 +54,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="ful">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -67,7 +67,7 @@
      <string>Full Stepping</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_3">
+   <widget class="QRadioButton" name="hlf">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -80,7 +80,7 @@
      <string>Half Stepping</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_4">
+   <widget class="QRadioButton" name="mic">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -106,7 +106,7 @@
    <property name="title">
     <string>Rotation Direction</string>
    </property>
-   <widget class="QRadioButton" name="radioButton_5">
+   <widget class="QRadioButton" name="cw">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -122,7 +122,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_6">
+   <widget class="QRadioButton" name="ccw">
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -148,7 +148,7 @@
    <property name="title">
     <string>Speed Input</string>
    </property>
-   <widget class="QSlider" name="horizontalSlider_2">
+   <widget class="QSlider" name="slider_speed">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -157,6 +157,9 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
     <property name="value">
      <number>50</number>
     </property>
@@ -164,11 +167,11 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_speed">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>50</y>
+      <x>275</x>
+      <y>60</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -188,9 +191,9 @@
     </rect>
    </property>
    <property name="title">
-    <string>Steps Input</string>
+    <string>Steps  Input</string>
    </property>
-   <widget class="QSlider" name="horizontalSlider_3">
+   <widget class="QSlider" name="slider_steps">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -199,6 +202,9 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
     <property name="value">
      <number>50</number>
     </property>
@@ -206,17 +212,17 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label_steps">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>50</y>
+      <x>264</x>
+      <y>60</y>
       <width>67</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>50%</string>
+     <string>500 steps</string>
     </property>
    </widget>
   </widget>
@@ -269,8 +275,42 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>slider_speed</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Dialog</receiver>
+   <slot>speedChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>527</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>670</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>slider_steps</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Dialog</receiver>
+   <slot>stepsChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>409</x>
+     <y>308</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>90</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>startClicked()</slot>
+  <slot>speedChanged(int)</slot>
+  <slot>stepsChanged(int)</slot>
  </slots>
 </ui>

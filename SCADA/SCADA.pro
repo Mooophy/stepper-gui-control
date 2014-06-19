@@ -15,6 +15,10 @@ TEMPLATE = app
 SOURCES += main.cpp\
         dialog.cpp
 
-HEADERS  += dialog.h
+HEADERS  += dialog.h \
+    Serial.hpp
 
 FORMS    += dialog.ui
+
+LIBS += \
+       -lboost_system\
