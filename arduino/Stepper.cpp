@@ -9,7 +9,9 @@
 #include "Stepper.h"
 
 /**
- * @brief wave stepping
+ * @brief   wave stepping
+ *
+ * @degree/step 7.5
  */
 void wave_stepping(const Stepper* stepper)
 {
@@ -42,6 +44,8 @@ void wave_stepping(const Stepper* stepper)
 
 /**
  * @brief full stepping
+ *
+ * @degree/step 7.5
  */
 void full_stepping(const Stepper* stepper)
 {
@@ -74,6 +78,8 @@ void full_stepping(const Stepper* stepper)
 
 /**
  * @brief half stepping
+ *
+ * @degree/step 3.75
  */
 void half_stepping(const Stepper* stepper)
 {
@@ -116,7 +122,9 @@ void half_stepping(const Stepper* stepper)
 }
 
 /**
- * @brief micr stepping
+ * @brief micro stepping
+ *
+ * @degree/step 1.40625
  */
 void micr_stepping(const Stepper* stepper)
 {
@@ -166,6 +174,9 @@ void micr_stepping(const Stepper* stepper)
 
 /**
  * @brief pwm
+ * @param pin
+ * @param period
+ * @param duty
  */
 void pwm(unsigned pin, unsigned period, unsigned duty)
 {
@@ -176,9 +187,10 @@ void pwm(unsigned pin, unsigned period, unsigned duty)
     delayMicroseconds(period - duty);  
 }
 
-
 /**
  * @brief build
+ *
+ * receive the string from PC and store in cmd
  */
 void build(String& cmd)
 {

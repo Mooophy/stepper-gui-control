@@ -39,8 +39,6 @@ public:
 	bool  running;    
 	bool  cw;
 	unsigned mode;
-
-    	void pwm(unsigned pin, unsigned period, unsigned duty);
 };
 
 void wave_stepping(const Stepper* stepper);
