@@ -1,4 +1,3 @@
-	
 /***************************************************************************
  *  @file       Stepper.cpp
  *  @author     Yue Wang
@@ -10,7 +9,7 @@
 #include "Stepper.h"
 
 /**
- * @brief wave
+ * @brief wave stepping
  */
 void wave_stepping(const Stepper* stepper)
 {
@@ -42,7 +41,7 @@ void wave_stepping(const Stepper* stepper)
 }
 
 /**
- * @brief full
+ * @brief full stepping
  */
 void full_stepping(const Stepper* stepper)
 {
@@ -74,7 +73,7 @@ void full_stepping(const Stepper* stepper)
 }
 
 /**
- * @brief half
+ * @brief half stepping
  */
 void half_stepping(const Stepper* stepper)
 {
@@ -117,7 +116,7 @@ void half_stepping(const Stepper* stepper)
 }
 
 /**
- * @brief micr
+ * @brief micr stepping
  */
 void micr_stepping(const Stepper* stepper)
 {
@@ -185,11 +184,11 @@ void build(String& cmd)
 {
   while (Serial.available()) 
   {
-    delay(3);  //delay to allow buffer to fill 
+    delay(3);                   //delay to allow buffer to fill
     if (Serial.available() > 0) 
     {
-      char c = Serial.read();  //gets one byte from serial buffer
-      cmd += c; //makes the string readString
+      char c = Serial.read();
+      cmd += c;
     } 
   }
 }
