@@ -20,6 +20,7 @@ public slots:
     void startClicked();
     void speedChanged(int speed);
     void stepsChanged(int steps);
+    void tested();
 
 private:
     Ui::Dialog *ui;

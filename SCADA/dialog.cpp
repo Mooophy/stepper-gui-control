@@ -3,6 +3,9 @@
 #include "Serial.hpp"
 #include <string>
 
+/**
+ * @brief Ctor
+ */
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog),
@@ -11,11 +14,17 @@ Dialog::Dialog(QWidget *parent) :
     ui->setupUi(this);
 }
 
+/**
+ * @brief Dtor
+ */
 Dialog::~Dialog()
 {
     delete ui;
 }
 
+/**
+ * @slot startClicked
+ */
 void Dialog::startClicked()
 {
     std::string data(4,0);
@@ -30,14 +39,32 @@ void Dialog::startClicked()
     data[3]  = ui->slider_steps->value();
 
     conn.writeString(data);
+
+    ui->progressBar->setValue(100);
 }
 
+/**
+ * @slot speedChanged
+ * @param speed
+ */
 void Dialog::speedChanged(int speed)
 {
     ui->label_speed->setText(QString::number(speed) + "%");
 }
 
+/**
+ * @slot stepsChanged
+ * @param steps
+ */
 void Dialog::stepsChanged(int steps)
 {
     ui->label_steps->setText(QString::number(steps * 10) + " steps");
+}
+
+/**
+ * @slot tested
+ */
+void Dialog::tested()
+{
+    ui->progressBar->setValue(100);
 }
