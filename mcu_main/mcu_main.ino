@@ -1,4 +1,4 @@
-#include "State.h"
+#include "Stepper.h"
 
 void setup() 
 {                
@@ -7,7 +7,6 @@ void setup()
   pinMode(C, OUTPUT);     
   pinMode(D, OUTPUT);
 
-  pinMode(indicator, HIGH);
   Serial.begin(9600);  
 }
 

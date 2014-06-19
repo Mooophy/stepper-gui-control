@@ -1,49 +1,12 @@
-#ifndef STATE_H
-#define STATE_H
+#include "Stepper.h"
 
-#include <WString.h>
-#include "Arduino.h"
 
-const int A = 8;
-const int B = 9;
-const int C = 10;
-const int D = 11;
-const int indicator = 13;
 
-class State
-{
-public: 
-  	//!  @ctor
-  	//!  @brief  :  decode cmd to generate the state.
-  	State(const String& cmd):
-    		spd(cmd[1] * 5),
-    		steps(10 * cmd[3]),
-    		running(true),
-    		cw(cmd[0] & 0x10),
-    		mode(cmd[0] & 0x0f)  
-  	{}
-
-	
-	unsigned spd;
-	unsigned steps;
-	bool  running;    
-	bool  cw;
-	unsigned mode;
-};
-
-void wave(const State* state);
-void full(const State* state);
-void half(const State* state);
-void micr(const State* state);
-void indicate(bool running);
-void pwm(unsigned pin, unsigned period, unsigned duty);
-void build(String& cmd);
 
 //!  @brief :  wave stepping
 //!  @speed range:  [10,500]
 void wave(const State* state)
 {
-  indicate(true);
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
   a = 0;
@@ -69,14 +32,12 @@ void wave(const State* state)
     //!  speed control
     delay(10000/(state->spd));
   }
-  indicate(false);
 }
 
 //!  @brief :  full stepping
 //!  @speed range:  [10,500]
 void full(const State* state)
 {
-  indicate(true);
   //!  specify the starting index according to the direction
   unsigned a,b,c,d;
   a = state->cw?  1  :  0;
@@ -102,14 +63,12 @@ void full(const State* state)
     //!  speed control
     delay(10000/(state->spd));
   }
-  indicate(false);  
 }
 
 //!  @brief :  half stepping
 //!  @speed range:  [10,500]
 void half(const State* state)
 {
-  indicate(true);  
   //!  specify the starting index according to the direction
   int a = 0, c = 2, b = 4, d = 6;
   
@@ -146,14 +105,12 @@ void half(const State* state)
     //!  speed control
     delay(10000/(state->spd));
   }
-  indicate(false);
 }
 
 //!  @brief :  micro stepping
 //!  @speed range:  [10,500]
 void micr(const State* state)
 {
-    indicate(true);
     //!  specify the starting index according to the direction  	
     const unsigned arr[32] = 
     {500, 625, 750, 875, 1000, 875, 750, 625, 500, 375, 250, 125, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0 ,0, 125, 250, 375};
@@ -195,14 +152,7 @@ void micr(const State* state)
 
       //!  speed control
       delay(10000/(state->spd));
-    }
-    indicate(false);    
-}
-
-//!  @brief  :  operate the built-in led i.e. pin 13
-void indicate(bool running)
-{
-    digitalWrite(indicator, running);
+    }   
 }
 
 //!  @brief  :  pwm signal generation
@@ -229,4 +179,3 @@ void build(String& cmd)
     } 
   }
 }
-#endif //STATE_H
