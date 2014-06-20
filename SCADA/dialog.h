@@ -24,7 +24,7 @@ public slots:
 
 private:
     Ui::Dialog *ui;
-    SimpleSerial conn;
+    //SimpleSerial conn;
 };
 
 #endif // DIALOG_H
