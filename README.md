@@ -1,4 +1,3 @@
 stepper-gui-control
 ===================
-
-for 281.478 project 2
+Stepper motor control system, using Arduino as embedded system and Qt as SCADA.
