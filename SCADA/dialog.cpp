@@ -9,7 +9,6 @@
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
-    //conn("/dev/ttyUSB0",9600)
 {
     ui->setupUi(this);
 }
@@ -28,19 +27,13 @@ Dialog::~Dialog()
 void Dialog::startClicked()
 {
     std::string data(4,0);
-
     data[0]  =  (ui->cw ->isChecked() << 4) +
                 (ui->mic->isChecked() << 3) +
                 (ui->hlf->isChecked() << 2) +
                 (ui->ful->isChecked() << 1) +
                 (ui->wav->isChecked() << 0) ;
-
-    data[1]  = (ui->slider_speed->value() < 75)?
-                (ui->slider_speed->value()) :   75   ;
-    data[3]  = ui->slider_steps->value();
-
-    //conn.writeString(data);
-
+    data[1]  =  (ui->slider_speed->value() < 75) ? (ui->slider_speed->value()) : 75;
+    data[3]  =  ui->slider_steps->value();
     ui->progressBar->setValue(100);
 }
 
