@@ -3,7 +3,7 @@
  *  @file       Stepper.h
  *  @author     Yue Wang
  *  @date       15  June 2014
- *  @remark     Implemented for project 2, 282.478
+ *  @remark     class Stepper 
  *  @note       
  ***************************************************************************/
 
