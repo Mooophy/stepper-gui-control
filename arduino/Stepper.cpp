@@ -2,7 +2,7 @@
  *  @file       Stepper.cpp
  *  @author     Yue Wang
  *  @date       15  June 2014
- *  @remark     Implemented for project 2, 282.478
+ *  @remark     Implmentation for class Class Stepper
  *  @note       
  ***************************************************************************/
 
